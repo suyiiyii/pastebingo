@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	"pastebingo/models"
+	"pastebingo/dal/models"
 
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
