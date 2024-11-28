@@ -1,3 +1,4 @@
+//go:generate swag init
 package main
 
 import (
@@ -15,8 +16,6 @@ import (
 	"gorm.io/gorm"
 )
 
-var GetQ func() *query.Query
-
 // @title			Pastebingo API
 // @version		1.0
 // @description	This is a sample server for Pastebingo.
@@ -28,12 +27,7 @@ func main() {
 		panic(err)
 	}
 
-	Q := query.Use(db)
 	query.SetDefault(db)
-
-	GetQ = func() *query.Query {
-		return Q
-	}
 
 	r := gin.Default()
 	server.RegisterRoutes(r)
