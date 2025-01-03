@@ -1,8 +1,11 @@
 //go:generate swag init
+//go:generate go run ./cmd/migrate
+//go:generate go run ./cmd/gen
 package main
 
 import (
 	"log"
+	"pastebingo/dal/models"
 	"pastebingo/dal/query"
 	"pastebingo/internal/server"
 
@@ -12,8 +15,6 @@ import (
 
 	"github.com/gin-gonic/gin"
 	ginSwagger "github.com/swaggo/gin-swagger"
-	"gorm.io/driver/sqlite"
-	"gorm.io/gorm"
 )
 
 // @title			Pastebingo API
@@ -22,11 +23,7 @@ import (
 // @host			localhost:8080
 // @BasePath		/
 func main() {
-	db, err := gorm.Open(sqlite.Open("db.db"), &gorm.Config{})
-	if err != nil {
-		panic(err)
-	}
-
+	db := models.DB
 	query.SetDefault(db)
 
 	r := gin.Default()

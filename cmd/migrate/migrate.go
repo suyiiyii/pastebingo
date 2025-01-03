@@ -2,20 +2,14 @@ package main
 
 import (
 	"log"
-
 	"pastebingo/dal/models"
-
-	"gorm.io/driver/sqlite"
-	"gorm.io/gorm"
 )
 
+// use pre-defined models to create tables
 func main() {
-	db, err := gorm.Open(sqlite.Open("db.db"), &gorm.Config{})
-	if err != nil {
-		log.Fatal(err)
-	}
+	db := models.DB
 
-	err = db.AutoMigrate(&models.User{})
+	err := db.AutoMigrate(&models.User{})
 	if err != nil {
 		log.Fatal(err)
 	}

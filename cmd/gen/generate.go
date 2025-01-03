@@ -1,18 +1,13 @@
 package main
 
 import (
-	"log"
+	"pastebingo/dal/models"
 
-	"gorm.io/driver/sqlite"
 	"gorm.io/gen"
-	"gorm.io/gorm"
 )
 
 func main() {
-	db, err := gorm.Open(sqlite.Open("db.db"), &gorm.Config{})
-	if err != nil {
-		log.Fatal(err)
-	}
+	db := models.DB
 
 	g := gen.NewGenerator(gen.Config{
 		OutPath: "dal/query",
