@@ -4,6 +4,7 @@ import (
 	"github.com/joho/godotenv"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
+	"log"
 	"os"
 )
 
@@ -14,9 +15,13 @@ const DB_ENV = "GORM_DB"
 func initDB() {
 	err := godotenv.Load()
 	if err != nil {
-		panic(err)
+		log.Default().Println("Error loading .env file")
 	}
-	db, err := gorm.Open(sqlite.Open(os.Getenv(DB_ENV)), &gorm.Config{})
+	dbName := os.Getenv(DB_ENV)
+	if dbName == "" {
+		dbName = "default.db"
+	}
+	db, err := gorm.Open(sqlite.Open(dbName), &gorm.Config{})
 	if err != nil {
 		panic(err)
 	}
