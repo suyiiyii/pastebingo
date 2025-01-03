@@ -22,7 +22,7 @@ import (
 // @version		1.0
 // @description	This is a sample server for Pastebingo.
 // @host			localhost:8080
-// @BasePath		/
+// @BasePath		/v1/
 func main() {
 	models.Migrate()
 	db := models.DB

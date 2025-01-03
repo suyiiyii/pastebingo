@@ -1,6 +1,48 @@
-basePath: /
+basePath: /v1/
 definitions:
+  gorm.DeletedAt:
+    properties:
+      time:
+        type: string
+      valid:
+        description: Valid is true if Time is not NULL
+        type: boolean
+    type: object
+  model.Post:
+    properties:
+      content:
+        type: string
+      created_at:
+        type: string
+      deleted_at:
+        $ref: '#/definitions/gorm.DeletedAt'
+      id:
+        type: integer
+      title:
+        type: string
+      updated_at:
+        type: string
+      user_id:
+        type: integer
+    type: object
   model.User:
+    properties:
+      created_at:
+        type: string
+      deleted_at:
+        $ref: '#/definitions/gorm.DeletedAt'
+      email:
+        type: string
+      id:
+        type: integer
+      password:
+        type: string
+      role:
+        type: string
+      updated_at:
+        type: string
+      username:
+        type: string
     type: object
 host: localhost:8080
 info:
@@ -9,6 +51,63 @@ info:
   title: Pastebingo API
   version: "1.0"
 paths:
+  /posts:
+    get:
+      consumes:
+      - application/json
+      description: Get a post
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Post'
+      summary: Get a post
+      tags:
+      - posts
+    post:
+      consumes:
+      - application/json
+      description: Create a new post
+      parameters:
+      - description: Post
+        in: body
+        name: post
+        required: true
+        schema:
+          $ref: '#/definitions/model.Post'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Post'
+      summary: Create a new post
+      tags:
+      - posts
+  /posts/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get a post
+      parameters:
+      - description: Post ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Post'
+      summary: Get a post
+      tags:
+      - posts
   /users:
     get:
       consumes:
