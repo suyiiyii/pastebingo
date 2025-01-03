@@ -1,0 +1,15 @@
+**/.git
+**/.DS_Store
+**/node_modules
+.editorconfig
+.git
+AUTHORS.md
+CONTRIBUTING.md
+LICENSE
+Makefile
+NOTICE
+README.md
+arm/
+powerpc/
+mips/
+Dockerfile
