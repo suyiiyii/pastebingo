@@ -1,4 +1,5 @@
-//go:generate swag init
+//go:generate swag init --parseDependency --parseInternal
+//go:generate swag fmt
 //go:generate go run ./cmd/migrate
 //go:generate go run ./cmd/gen
 package main

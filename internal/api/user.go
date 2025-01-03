@@ -39,7 +39,7 @@ func UserCreate(r *gin.RouterGroup) {
 // @Tags			users
 // @Accept			json
 // @Produce		json
-// @Success		200	{array}		model.User
+// @Success		200	{array}	model.User
 // @Router			/users [get]
 func UserGet(r *gin.RouterGroup) {
 
