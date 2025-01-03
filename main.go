@@ -23,6 +23,7 @@ import (
 // @host			localhost:8080
 // @BasePath		/
 func main() {
+	models.Migrate()
 	db := models.DB
 	query.SetDefault(db)
 
