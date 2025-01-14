@@ -13,3 +13,4 @@ arm/
 powerpc/
 mips/
 Dockerfile
+frontend/node_modules
