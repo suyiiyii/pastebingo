@@ -6,6 +6,7 @@ package main
 
 import (
 	"log"
+	"net/http"
 	"pastebingo/dal/models"
 	"pastebingo/dal/query"
 	"pastebingo/internal/server"
@@ -32,6 +33,19 @@ func main() {
 	server.RegisterRoutes(r)
 	// Swagger 路由
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+
+	// 挂载前端页面
+	// 定义文件服务器
+	fileServer := http.FileServer(http.Dir("./dist"))
+
+	// 去除 URL 前缀
+	r.GET("/", func(c *gin.Context) {
+		http.ServeFile(c.Writer, c.Request, "./dist/index.html")
+	})
+	// 处理其他静态文件
+	r.NoRoute(func(c *gin.Context) {
+		fileServer.ServeHTTP(c.Writer, c.Request)
+	})
 
 	// 启动服务器
 	if err := r.Run(":8080"); err != nil {
